@@ -1,4 +1,4 @@
-import { NavigationNavigateAction } from "react-navigation";
+import { NavigationNavigateAction, NavigationResetAction } from "react-navigation";
 
 import {
     AuthAction,
@@ -21,7 +21,7 @@ export const defaultAuthState: AuthState = {
     loading: false
 };
 
-export const authReducer = (state: AuthState = defaultAuthState, action: AuthAction | NavigationNavigateAction): AuthState => {
+export const authReducer = (state: AuthState = defaultAuthState, action: AuthAction | NavigationNavigateAction | NavigationResetAction): AuthState => {
     switch (action.type) {
         case AUTH_LOGIN:
         case AUTH_SIGN_UP:
@@ -53,6 +53,7 @@ export const authReducer = (state: AuthState = defaultAuthState, action: AuthAct
                 profile: undefined
             }
         case 'Navigation/NAVIGATE':
+        case 'Navigation/RESET':
             return {
                 ...state,
                 error: undefined
