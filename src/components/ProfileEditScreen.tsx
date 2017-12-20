@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, KeyboardAvoidingView, ScrollView } from "react-native";
 import { connect, Dispatch } from "react-redux";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { authUpdateProfile } from "../store";
 import { validateForm, isValid, requiredValidator, setFields, getFields } from "../forms";
@@ -74,28 +73,30 @@ class ProfileEditComponent extends React.Component<ProfileEditComponentProps, Pr
         const fieldErrors = serverError && serverError.fieldErrors;
 
         return (
-            <KeyboardAwareScrollView>
-                <View style={styles.container}>
-                    <View style={styles.form}>
-                        <Text style={styles.error}>{serverError && serverError.message}</Text>
-                        {
-                            Object.keys(this.state).map((field: keyof ProfileEditComponentState, index) => (
-                                <FormControl
-                                    key={index}
-                                    control={this.state[field]}
-                                    serverError={fieldErrors && fieldErrors[field]}
-                                    onChange={text => this.handleControlChange(text, field)}
-                                />
-                            ))
-                        }
-                        <Button
-                            title="Save Changes"
-                            disabled={loading}
-                            onPress={() => this.handleSubmit()}
-                        />
+            <KeyboardAvoidingView behavior="padding">
+                <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+                    <View style={styles.container}>
+                        <View style={styles.form}>
+                            <Text style={styles.error}>{serverError && serverError.message}</Text>
+                            {
+                                Object.keys(this.state).map((field: keyof ProfileEditComponentState, index) => (
+                                    <FormControl
+                                        key={index}
+                                        control={this.state[field]}
+                                        serverError={fieldErrors && fieldErrors[field]}
+                                        onChange={text => this.handleControlChange(text, field)}
+                                    />
+                                ))
+                            }
+                            <Button
+                                title="Save Changes"
+                                disabled={loading}
+                                onPress={() => this.handleSubmit()}
+                            />
+                        </View>
                     </View>
-                </View>
-            </KeyboardAwareScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         )
     }
 
