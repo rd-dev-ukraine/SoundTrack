@@ -1,3 +1,3 @@
-import { App } from "./lib/App";
+import { App } from "./native/lib/native/App";
 
 export default App;

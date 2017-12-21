@@ -5,14 +5,25 @@
         "noImplicitAny": false,
         "sourceMap": true,
         "pretty": true,
-        "outDir": "./lib",
+        "outDir": "./native/lib",
         "jsx": "react",
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "typeRoots": [
             "./node_modules/@types",
-            "./src/declarations"
+            "./common/declarations"
+        ],
+        "types": [
+            "react",
+            "react-native",
+            "react-navigation"
         ]
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "!node_modules/@types",
+        "native/lib",
+        "web"
+    ]
 }
