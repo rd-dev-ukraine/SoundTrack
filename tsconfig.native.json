@@ -19,5 +19,11 @@
             "react-native",
             "react-navigation"
         ]
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "!node_modules/@types",
+        "native/lib",
+        "web"
+    ]
 }

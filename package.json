@@ -41,11 +41,11 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "npm run build:native && concurrently \"npm run watch:native\" \"react-native-scripts start\"",
-    "build:native": "rimraf ./native/lib/* && tsc",
+    "build:native": "rimraf ./native/lib/* && tsc --p tsconfig.native.json",
+    "watch:native": "tsc --p tsconfig.native.json -w --pretty",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "watch:native": "tsc -w --pretty",
     "start:web": "webpack-dev-server --config ./web/webpack.config.js --progress --color --open",
     "build:web": "webpack --progress --profile --hide-modules --colors",
     "build:dist:web": "npm run build -- --env=prod"

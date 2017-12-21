@@ -1,7 +1,7 @@
 import { connect, Dispatch } from "react-redux";
 
-import { authChangePassword } from "../../common/actions/auth";
-import { ChangePasswordComponent } from "../../common/components";
+import { authChangePassword } from "../../../common/actions/auth";
+import { ChangePasswordComponent } from "../../../common/components/ChangePassword";
 
 const mapStateToProps = (state: AppState) => {
     return {
@@ -16,4 +16,4 @@ const mapDispatchToPros = (dispatch: Dispatch<AppState>) => {
     };
 }
 
-export const ChangePasswordScreen = connect(mapStateToProps, mapDispatchToPros)(ChangePasswordComponent);
+export const ChangePasswordPage = connect(mapStateToProps, mapDispatchToPros)(ChangePasswordComponent);

@@ -1,7 +1,7 @@
 import { connect, Dispatch } from "react-redux";
 
-import { authSignUp } from "../../common/actions/auth";
-import { SignUpComponent } from "../../common/components";
+import { authSignUp } from "../../../common/actions/auth";
+import { SignUpComponent } from "../../../common/components/SignUp";
 
 
 const mapStateToProps = (state: AppState) => {
@@ -17,4 +17,4 @@ const mapDispatchToPros = (dispatch: Dispatch<AppState>) => {
     };
 }
 
-export const SignUpScreen = connect(mapStateToProps, mapDispatchToPros)(SignUpComponent);
+export const SignUpPage = connect(mapStateToProps, mapDispatchToPros)(SignUpComponent);

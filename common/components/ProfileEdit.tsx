@@ -71,7 +71,7 @@ export class ProfileEditComponent extends React.Component<ProfileEditComponentPr
         const fieldErrors = serverError && serverError.fieldErrors;
 
         return (
-            <KeyboardAvoidingView behavior="padding">
+            <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
                     <View style={styles.container}>
                         <View style={styles.form}>

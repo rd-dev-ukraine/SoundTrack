@@ -17,6 +17,7 @@ async function convertResult(resp: Response): Promise<ApiResponse<User>> {
 const headers = (token?: string) => new Headers({
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Origin': '*',
     'Auth-Token': token
 });
 

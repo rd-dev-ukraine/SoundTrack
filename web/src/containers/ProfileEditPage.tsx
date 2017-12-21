@@ -1,7 +1,7 @@
 import { connect, Dispatch } from "react-redux";
 
-import { authUpdateProfile } from "../../common/actions/auth";
-import { ProfileEditComponent } from "../../common/components";
+import { authUpdateProfile } from "../../../common/actions/auth";
+import { ProfileEditComponent } from "../../../common/components/ProfileEdit";
 
 const mapStateToProps = (state: AppState) => {
     return {
@@ -17,4 +17,4 @@ const mapDispatchToPros = (dispatch: Dispatch<AppState>) => {
     };
 }
 
-export const ProfileEditScreen = connect(mapStateToProps, mapDispatchToPros)(ProfileEditComponent);
+export const ProfileEditPage = connect(mapStateToProps, mapDispatchToPros)(ProfileEditComponent);

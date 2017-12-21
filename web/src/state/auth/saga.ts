@@ -1,9 +1,8 @@
 import { takeLatest, takeEvery, put, call, select } from "redux-saga/effects";
-import { push } from 'react-router-redux';
+import { push, LOCATION_CHANGE, LocationChangeAction } from 'react-router-redux';
 
 import { login, signUp, updateProfile } from "../../../../common/api/requests";
-import { asyncStorageKey } from "../../../../common/constants";
-
+import { ProfileRoute, LoginRoute, SignUpRoute } from "../../common/routes";
 import {
     AUTH_LOGIN,
     AuthLogin,
@@ -73,26 +72,25 @@ function* changePasswordSaga(action: AuthChangePassword) {
 }
 
 function* loggedOutSaga() {
-    yield put(NavigationActions.reset({
-        index: 0,
-        actions: [
-            NavigationActions.navigate({ routeName: "Login" })
-        ]
-    }));
-
-    yield call(
-        AsyncStorage.removeItem,
-        `${asyncStorageKey}:profile`
-    );
+    localStorage.removeItem("profile");
+    yield put(push(LoginRoute));
 }
 
 function* successLoginSaga(profile: User): any {
+    localStorage.setItem("profile", JSON.stringify(profile));
     yield put(authLoggedIn(profile));
-    yield call(
-        AsyncStorage.setItem,
-        `${asyncStorageKey}:profile`,
-        JSON.stringify(profile)
-    );
+}
+
+function* checkLoggedIn(action: LocationChangeAction): any {
+    const profile = yield select(({ auth: { profile } }: AppState) => profile);
+    const isSignRoute = action.payload.pathname === LoginRoute || action.payload.pathname === SignUpRoute;
+
+    if (isSignRoute && profile) {
+        yield put(push(ProfileRoute));
+    }
+    if (!profile && !isSignRoute) {
+        yield put(push(LoginRoute));
+    }
 }
 
 
@@ -104,11 +102,8 @@ export function* authSaga() {
     yield takeLatest(AUTH_UPDATE_PROFILE, updateProfileSaga);
 
     yield takeEvery(AUTH_LOGGED_IN, function* () {
-        yield put(NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: "Main" })
-            ]
-        }));
-    })
+        yield put(push(ProfileRoute));
+    });
+
+    yield takeEvery(LOCATION_CHANGE, checkLoggedIn);
 }
