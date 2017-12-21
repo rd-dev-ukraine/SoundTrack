@@ -47,8 +47,8 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "start:web": "webpack-dev-server --config ./web/webpack.config.js --progress --color --open",
-    "build:web": "webpack --progress --profile --hide-modules --colors",
-    "build:dist:web": "npm run build -- --env=prod"
+    "build:web": "webpack --config ./web/webpack.config.js --progress --profile --hide-modules --colors",
+    "build:dist:web": "npm run build:web -- --env=prod"
   },
   "jest": {
     "preset": "jest-expo"

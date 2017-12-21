@@ -2,6 +2,7 @@
 #build
 lib/
 build/
+web/public/
 # expo
 .expo/
 
